@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/classes/user';
 
 @Component({
   selector: 'app-user-form',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-  user:UserViewModel = {
+  user:User = {
     name : '',
     birthDate:'',
     email:''
@@ -27,10 +28,4 @@ export class UserFormComponent implements OnInit {
       }
     )
   }
-}
-
-export interface UserViewModel{
-  name:string
-  birthDate:string
-  email:String 
 }
