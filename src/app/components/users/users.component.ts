@@ -26,4 +26,16 @@ export class UsersComponent implements OnInit {
     )
   }
 
+  public delete(id:number){
+    if(confirm(`Are you sure to delete the user with ID ${id} ?`))
+      this.service.delete(id).subscribe(
+        { next : () => {
+            alert("User deleted")
+            location.reload()
+          },
+          error : (e) => console.error(e)
+        }
+      )
+  }
+
 }

@@ -19,4 +19,8 @@ export class UserService {
     return this.http.post(this.API_URL, user)
   }
 
+  delete(id : number) : Observable<Object> {
+    return this.http.delete(`${this.API_URL}/${id}`)
+  }
+
 }
