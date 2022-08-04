@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/classes/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -13,18 +13,16 @@ export class UserFormComponent implements OnInit {
     birthDate:'',
     email:''
   }
-  private url:string = 'http://localhost:8080/api/users'
 
-  constructor(private http:HttpClient) { }
+  constructor(private service:UserService) { }
 
   ngOnInit(): void {
   }
 
   sendUser():void{
-    alert(this.user.name + '\n' +this.user.email+'\n'+this.user.birthDate)
-    this.http.post(this.url, this.user).subscribe(
-      { next : (v) => {location.reload()},
-        error : (e) => {alert(e.getMessage())}
+    this.service.send(this.user).subscribe(
+      { next : (n) => location.reload(),
+        error : (e) => console.error(e)
       }
     )
   }
