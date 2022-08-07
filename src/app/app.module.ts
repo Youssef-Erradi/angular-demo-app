@@ -21,7 +21,11 @@ const APP_ROUTES : Routes = [
     component : UsersComponent
   },
   {
-    path:'user-form',
+    path:'add',
+    component : UserFormComponent
+  },
+  {
+    path:'edit/:id',
     component : UserFormComponent
   },
   {
