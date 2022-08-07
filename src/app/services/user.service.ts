@@ -15,12 +15,18 @@ export class UserService {
     return this.http.get<User[]>(this.API_URL);
   }
 
-  send(user : User) : Observable<Object> {
+  save(user : User) : Observable<Object> {
+    if(user.id)
+      return this.http.put(`${this.API_URL}/${user.id}`, user)  
     return this.http.post(this.API_URL, user)
   }
 
   delete(id : number) : Observable<Object> {
     return this.http.delete(`${this.API_URL}/${id}`)
+  }
+
+  get(id : number) : Observable<User> {
+    return this.http.get<User>(`${this.API_URL}/${id}`)
   }
 
 }
