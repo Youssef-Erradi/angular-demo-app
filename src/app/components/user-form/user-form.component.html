@@ -4,7 +4,7 @@
             <i class="fa fa-user-plus fa-3"></i> Add new user
         </div>
         <div class="card-body">
-            <form name="form" #f="ngForm" novalidate (ngSubmit)="f.form.valid && sendUser()">
+            <form name="form" #f="ngForm" novalidate (ngSubmit)="f.form.valid && saveUser()">
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name *</label>
                     <input type="text" class="form-control" id="name" name="name" required
