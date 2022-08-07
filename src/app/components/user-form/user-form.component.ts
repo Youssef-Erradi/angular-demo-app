@@ -23,9 +23,9 @@ export class UserFormComponent implements OnInit {
       this.getUser(id)
   }
 
-  sendUser():void{
+  saveUser():void{
     this.service.save(this.user).subscribe(
-      { next : (n) => location.reload(),
+      { next : (n) => location.href = '/users',
         error : (e) => console.error(e)
       }
     )
