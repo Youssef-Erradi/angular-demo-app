@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,16 +15,31 @@ export class UserFormComponent implements OnInit {
     email:''
   }
 
-  constructor(private service:UserService) { }
+  constructor(private service:UserService, private router:ActivatedRoute) { }
 
   ngOnInit(): void {
+    let id:number = this.router.snapshot.params["id"]
+    if(id)
+      this.getUser(id)
   }
 
   sendUser():void{
-    this.service.send(this.user).subscribe(
+    this.service.save(this.user).subscribe(
       { next : (n) => location.reload(),
         error : (e) => console.error(e)
       }
     )
   }
+
+  getUser(id:number):void{
+    this.service.get(id).subscribe(
+      { next : (n) => {
+        this.user = n
+        this.user["id"] = n["id"]
+      },
+        error : (e) => console.error(e)
+      }
+    )
+  }
+
 }
