@@ -7,7 +7,7 @@ import { UsersComponent } from './components/users/users.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { Router, RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 const APP_ROUTES : Routes = [
@@ -46,7 +46,8 @@ const APP_ROUTES : Routes = [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
