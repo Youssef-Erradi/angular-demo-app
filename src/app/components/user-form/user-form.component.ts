@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,17 +15,17 @@ export class UserFormComponent implements OnInit {
     email:''
   }
 
-  constructor(private service:UserService, private router:ActivatedRoute) { }
+  constructor(private service:UserService, private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
-    let id:number = this.router.snapshot.params["id"]
+    let id:number = this.route.snapshot.params["id"]
     if(id)
       this.getUser(id)
   }
 
   saveUser():void{
     this.service.save(this.user).subscribe(
-      { next : (n) => location.href = '/users',
+      { next : (n) => this.router.navigate(['/users']),
         error : (e) => console.error(e)
       }
     )
