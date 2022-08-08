@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/classes/user';
 import { UserService } from 'src/app/services/user.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -10,10 +10,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UsersComponent implements OnInit {
   protected users:Array<User> = []
-  constructor(private service:UserService) { }
+
+  constructor(private service:UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getUsers()
+    console.log(this.route.snapshot.params)
   }
 
   public getUsers(){
@@ -27,11 +29,11 @@ export class UsersComponent implements OnInit {
   }
 
   public delete(id:number){
-    if(confirm(`Are you sure to delete the user with ID ${id} ?`))
+    if(confirm(`Are you sure you want to delete the user with ID ${id} ?`))
       this.service.delete(id).subscribe(
         { next : () => {
             alert("User deleted")
-            location.reload()
+            this.ngOnInit();
           },
           error : (e) => console.error(e)
         }
