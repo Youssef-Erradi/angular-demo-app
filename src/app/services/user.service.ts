@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
@@ -27,6 +27,12 @@ export class UserService {
 
   get(id : number) : Observable<User> {
     return this.http.get<User>(`${this.API_URL}/${id}`)
+  }
+
+  searchByKeyword(keyword:string) : Observable<User[]>{
+    let params = new HttpParams();
+    params = params.append('q', keyword.toLowerCase() );
+    return this.http.get<User[]>(`${this.API_URL}`,{params:params})
   }
 
 }
