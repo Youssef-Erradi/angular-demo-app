@@ -4,39 +4,32 @@
             <i class="fa fa-user-plus fa-3"></i> Add new user
         </div>
         <div class="card-body">
-            <form name="form" #f="ngForm" novalidate (ngSubmit)="f.form.valid && saveUser()">
+            <form [formGroup]="formGroup" (ngSubmit)="saveUser()">
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name *</label>
-                    <input type="text" class="form-control" id="name" name="name" required
-                        [(ngModel)]="user.name"
-                        #name="ngModel"
-                        [ngClass]="{'is-invalid' : f.submitted && name.invalid}">
-                    <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
-                        <span *ngIf="name.errors!['required']">Name is required</span>
+                    <input type="text" class="form-control" formControlName="name">
+                    <div *ngIf="formGroup.controls['name'].errors && formGroup.controls['name'].touched"
+                        class="text-danger">
+                        {{getErrorMessage('name')}}
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="birthDate" class="form-label">Birth Date *</label>
-                    <input type="date" class="form-control" id="birthDate" name="birthDate" required
-                        [(ngModel)]="user.birthDate"
-                        #birthDate="ngModel"
-                        [ngClass]="{'is-invalid' : f.submitted && birthDate.invalid}">
-                    <div *ngIf="f.submitted && birthDate.invalid" class="invalid-feedback">
-                        <span *ngIf="birthDate.errors!['required']">Birth date is required</span>
+                    <input type="date" class="form-control" formControlName="birthDate">
+                    <div *ngIf="formGroup.controls['birthDate'].errors && formGroup.controls['birthDate'].touched"
+                        class="text-danger">
+                        {{getErrorMessage('birthDate')}}
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email *</label>
-                    <input type="email" class="form-control" id="email" name="email" required email
-                        [(ngModel)]="user.email"
-                        #email="ngModel"
-                        [ngClass]="{'is-invalid' : f.submitted && email.invalid}">
-                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-                        <span *ngIf="email.errors!['required']">Email address is required</span>
-                        <span *ngIf="email.errors!['email']">Email address is not valid</span>
+                    <input type="email" class="form-control" formControlName="email">
+                    <div *ngIf="formGroup.controls['email'].errors && formGroup.controls['email'].touched"
+                        class="text-danger">
+                        {{getErrorMessage('email')}}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success pull-right">
+                <button [disabled]="formGroup.invalid" type="submit" class="btn btn-success pull-right">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     Submit
                 </button>
