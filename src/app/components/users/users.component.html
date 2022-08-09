@@ -24,7 +24,7 @@
             <tr *ngFor="let user of users">
                 <th scope="row">{{user.id}}</th>
                 <td>{{user.name}}</td>
-                <td>{{user.birthDate}}</td>
+                <td>{{user.birthDate | date: 'dd/MM/yyyy'}}</td>
                 <td>{{user.email}}</td>
                 <td class="actions">
                     <a [routerLink]="['/edit/' + user.id]"><i class="fa fa-pencil text-primary"></i></a>
