@@ -24,6 +24,11 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.initFormGroup()
     let id:number = this.route.snapshot.params["id"]
+    console.log(id)
+    if(id && isNaN(+id)){
+      this.router.navigateByUrl("/users")
+      return
+    }
     if(id)
       this.getUser(id)   
   }
