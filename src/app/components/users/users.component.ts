@@ -46,7 +46,10 @@ export class UsersComponent implements OnInit {
 
   protected searchByKeyword(){
     const q = this.searchFormGroup.value.q.toLowerCase();
-    this.users = this.users.filter(user => user.name.toLowerCase().includes(q))
+    this.service.searchByKeyword(q).subscribe({
+      next : (users) => this.users = users,
+      error : e => console.error(e)
+    })
   }
 
 }
