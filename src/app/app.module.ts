@@ -12,32 +12,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
-const APP_ROUTES : Routes = [
-  {
-    path:'',
-    component : UsersComponent,
-    pathMatch:'full'
-  },
-  {
-    path:'login',
-    component : LoginComponent,
-  },
-  {
-    path:'users',
-    component : UsersComponent
-  },
-  {
-    path:'add',
-    component : UserFormComponent
-  },
-  {
-    path:'edit/:id',
-    component : UserFormComponent
-  },
-  {
-    path:'**',
-    component: NotFoundComponent
-  }
+const APP_ROUTES: Routes = [
+  { path: '',         component: UsersComponent, pathMatch: 'full' },
+  { path: 'login',    component: LoginComponent, },
+  { path: 'users',    component: UsersComponent },
+  { path: 'add',      component: UserFormComponent },
+  { path: 'edit/:id', component: UserFormComponent },
+  { path: '**',       component: NotFoundComponent }
 ]
 
 @NgModule({
@@ -58,9 +39,9 @@ const APP_ROUTES : Routes = [
   ],
   providers: [
     {
-      provide : HTTP_INTERCEPTORS,
+      provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
-      multi   : true,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent]
