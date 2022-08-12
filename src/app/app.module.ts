@@ -9,12 +9,17 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
 
 const APP_ROUTES : Routes = [
   {
     path:'',
     component : UsersComponent,
     pathMatch:'full'
+  },
+  {
+    path:'login',
+    component : LoginComponent,
   },
   {
     path:'users',
@@ -40,7 +45,8 @@ const APP_ROUTES : Routes = [
     NavigationComponent,
     UsersComponent,
     UserFormComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
