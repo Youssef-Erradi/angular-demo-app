@@ -1,4 +1,4 @@
 <div class="container-lg">
-  <app-navigation></app-navigation>
+  <app-navigation *ngIf="router.url !== '/login'"></app-navigation>
   <router-outlet></router-outlet>
 </div>
