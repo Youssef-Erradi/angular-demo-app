@@ -11,14 +11,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 const APP_ROUTES: Routes = [
-  { path: '',         component: UsersComponent, pathMatch: 'full' },
-  { path: 'login',    component: LoginComponent, },
-  { path: 'users',    component: UsersComponent },
-  { path: 'add',      component: UserFormComponent },
-  { path: 'edit/:id', component: UserFormComponent },
-  { path: '**',       component: NotFoundComponent }
+  { path: 'login',    component: LoginComponent},
+  { path: '',         component: UsersComponent, pathMatch: 'full' , canActivate : [AuthenticationGuard]},
+  { path: 'users',    component: UsersComponent, canActivate : [AuthenticationGuard]},
+  { path: 'add',      component: UserFormComponent, canActivate : [AuthenticationGuard]},
+  { path: 'edit/:id', component: UserFormComponent, canActivate : [AuthenticationGuard]},
+  { path: '**',       component: NotFoundComponent, canActivate : [AuthenticationGuard]}
 ]
 
 @NgModule({
