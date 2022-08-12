@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,8 +16,15 @@ export class AuthenticationService {
     return this.http.post(this.LOGIN_URL, credential);
   }
 
-  storeTokens(access:string, refresh:string){
-    const tokens = JSON.stringify({access:access, refresh:refresh})
-    localStorage.setItem("tokens", tokens)
+  storeTokens(tokens:string) : Observable<boolean>{
+    localStorage.setItem("tokens", JSON.stringify(tokens))
+    return of(true);
+  }
+
+  getToken() : string | void{
+    let item = localStorage.getItem("tokens");
+    if(!item) return
+    const tokens = JSON.parse(item)
+    return tokens.access;
   }
 }
