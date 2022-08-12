@@ -8,8 +8,9 @@ import { UserFormComponent } from './components/user-form/user-form.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
+import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 
 const APP_ROUTES : Routes = [
   {
@@ -55,7 +56,13 @@ const APP_ROUTES : Routes = [
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi   : true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
