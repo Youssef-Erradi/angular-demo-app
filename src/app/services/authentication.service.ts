@@ -27,4 +27,11 @@ export class AuthenticationService {
     const tokens = JSON.parse(item)
     return tokens.access;
   }
+
+  isAuthenticated(): boolean{
+    if(!localStorage.getItem("tokens"))
+      return false;
+    return true;
+  }
+
 }
